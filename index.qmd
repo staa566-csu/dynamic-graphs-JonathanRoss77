@@ -17,7 +17,7 @@ dat$Seed <- as.factor(dat$Seed)
 
 ## Data Set
 
-Using the Datasets package in R, the Loblolly dataset was loaded. The data contained in this dataset tracks the height and age of several Loblolly pine trees.  
+Using the Datasets package in R, the Loblolly dataset was loaded. The data contained in this dataset tracks the height and age of several Loblolly Pine trees.  
 
 ## Summary Tables
 
