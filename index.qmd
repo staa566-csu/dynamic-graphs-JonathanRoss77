@@ -14,14 +14,13 @@ head(dat)
 dat$Seed <- as.factor(dat$Seed)
 ```
 
-
 ## Data Set
 
-Using the Datasets package in R, the Loblolly dataset was loaded. The data contained in this dataset tracks the height and age of several Loblolly Pine trees.  
+Using the Datasets package in R, the Loblolly dataset was loaded. The data contained in this dataset tracks the height and age of several Loblolly Pine trees.
 
 ## Summary Tables
 
-The following table shows the average height of all Loblolly pine trees across each age group. 
+The following table shows the average height of all Loblolly pine trees across each age group.
 
 ```{r}
 library(dplyr)
@@ -32,11 +31,9 @@ dat2 <- dat %>%
 dat2
 ```
 
+## Creating a dynamic plot
 
-
-## Creating a dynamic plot 
-
-In this plot, the goal is to show how the height of each Loblolly tree changes as the tree ages. Hovering over the data points provides the height and age of the given tree. 
+In this plot, the goal is to show how the height of each Loblolly tree changes as the tree ages. Hovering over the data points provides the height and age of the given tree.
 
 ```{r}
 library(ggplot2)
@@ -73,7 +70,7 @@ layout(legend = list(x=100, y=0,
 p
 ```
 
-As we can see in the chart, the Loblolly pine tree seeds were likely treated similarly as all of the trees had very similar growth profiles. The plot below shows a comparison of 25 year tree height. Seed 329 was the shortest at 56.43 feet while seed 305 was the tallest at 64.10 feet. 
+As we can see in the chart, the Loblolly pine tree seeds were likely treated similarly as all of the trees had very similar growth profiles. The plot below shows a comparison of 25 year tree height. Seed 329 was the shortest at 56.43 feet while seed 305 was the tallest at 64.10 feet.
 
 ```{r}
 q <- ggplot(data = dat[dat[,2]==25,], aes(x = as.character(Seed), y = height, fill = as.factor(Seed))) + geom_col() + 
@@ -86,10 +83,3 @@ q <- ggplotly(q, tooltip = "height")
 
 q
 ```
-
-
-
-
-
-
-
