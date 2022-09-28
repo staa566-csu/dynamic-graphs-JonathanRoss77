@@ -33,7 +33,7 @@ dat2
 
 ## Creating a dynamic plot
 
-In this plot, the goal is to show how the height of each Loblolly tree changes as the tree ages. Hovering over the data points provides the height and age of the given tree.
+In this plot, the goal is to show how the height of each Loblolly tree changes as the tree ages. Hovering over the data points provides the height and age of the given tree. The hovering ability allows the user to easily see the raw data behind the points and to easily distinguish between lines. 
 
 ```{r}
 library(ggplot2)
@@ -70,7 +70,7 @@ layout(legend = list(x=100, y=0,
 p
 ```
 
-As we can see in the chart, the Loblolly pine tree seeds were likely treated similarly as all of the trees had very similar growth profiles. The plot below shows a comparison of 25 year tree height. Seed 329 was the shortest at 56.43 feet while seed 305 was the tallest at 64.10 feet.
+As we can see in the chart, the Loblolly pine tree seeds were likely treated similarly as all of the trees had very similar growth profiles. The plot below shows a comparison of 25 year tree height. Seed 329 was the shortest at 56.43 feet while seed 305 was the tallest at 64.10 feet. I added the tooltip to easily see the raw data values for each tree. 
 
 ```{r}
 q <- ggplot(data = dat[dat[,2]==25,], aes(x = as.character(Seed), y = height, fill = as.factor(Seed))) + geom_col() + 
