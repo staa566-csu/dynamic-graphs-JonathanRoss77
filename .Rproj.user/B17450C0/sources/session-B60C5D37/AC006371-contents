@@ -1,0 +1,85 @@
+---
+title: "HW2"
+author: "Jonathan Ross"
+format: html
+editor: visual
+---
+
+```{r}
+library(datasets)
+library(knitr)
+dat <- as.data.frame(Loblolly)
+attach(dat)
+head(dat)
+dat$Seed <- as.factor(dat$Seed)
+```
+
+## Data Set
+
+Using the Datasets package in R, the Loblolly dataset was loaded. The data contained in this dataset tracks the height and age of several Loblolly Pine trees.
+
+## Summary Tables
+
+The following table shows the average height of all Loblolly pine trees across each age group.
+
+```{r}
+library(dplyr)
+dat2 <- dat %>%
+  group_by(age) %>%
+  summarize(Mean_Height = mean(height))
+
+dat2
+```
+
+## Creating a dynamic plot
+
+In this plot, the goal is to show how the height of each Loblolly tree changes as the tree ages. Hovering over the data points provides the height and age of the given tree.
+
+```{r}
+library(ggplot2)
+library(plotly)
+
+cols <- c("301" = "red", 
+          "303"  = "blue",
+          "305" = "darkgreen",
+          "307" = "green",
+          "309" = "orange",
+          "311" = "black",
+          "313" = "brown",
+          "315" = "grey",
+          "317" = "purple",
+          "319" = "pink",
+          "321" = "lightgreen",
+          "323" = "cadetblue",
+          "325" = "darkgoldenrod",
+          "327" = "darkseagreen",
+          "329" = "lavender",
+          "331" = "lightsalmon"
+  
+)
+p <- ggplot(data = dat, aes(x = age, y = height, color = Seed)) + geom_point() + geom_line() + 
+  theme_bw() + ggtitle("Loblolly Pine Growth") + 
+  xlab("Age (years)") + ylab("Height (feet)") + labs( color = "Seed") + scale_color_manual(values = cols)
+
+p <- ggplotly(p, tooltip = c("Seed", "age", "height")) %>%
+layout(legend = list(x=100, y=0, 
+                     orientation = 'h')) %>%
+  rangeslider(start = 0, end = 30)
+
+
+p
+```
+
+As we can see in the chart, the Loblolly pine tree seeds were likely treated similarly as all of the trees had very similar growth profiles. The plot below shows a comparison of 25 year tree height. Seed 329 was the shortest at 56.43 feet while seed 305 was the tallest at 64.10 feet.
+
+```{r}
+q <- ggplot(data = dat[dat[,2]==25,], aes(x = as.character(Seed), y = height, fill = as.factor(Seed))) + geom_col() + 
+  theme_bw() + ggtitle("Loblolly Pine Growth") + 
+  xlab("Seed Number") + ylab("Height (feet)") + 
+  theme(legend.position = 'none') + scale_fill_manual(values = cols)
+
+q <- ggplotly(q, tooltip = "height") 
+
+
+q
+```
